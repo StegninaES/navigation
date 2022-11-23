@@ -10,28 +10,13 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    //var uiTabBarController = UITabBarController()
     var window: UIWindow?
-
-   // tabBarController.viewControllers = [feedViewController, profileViewController]
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-//        let feedVC = FeedViewController()
-//        let profileVC = ProfileViewController()
-//        //nav
-//        let feedNavController = UINavigationController(rootViewController: feedVC)
-////
-//        let profileNavController = UINavigationController(rootViewController: profileVC)
-//        
-//        let tabBarVC = UITabBarController()
-//        tabBarVC.setViewControllers([feedNavController, profileNavController], animated: true)
-//        
-//        self.window?.rootViewController = tabBarVC
+
         self.window?.makeKeyAndVisible()
-        
         
         return true
     }
