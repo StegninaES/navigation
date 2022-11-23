@@ -14,6 +14,7 @@
 		F32C10DE292D613900300E67 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10DD292D613900300E67 /* FeedViewController.swift */; };
 		F32C10E0292D618600300E67 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10DF292D618600300E67 /* ProfileViewController.swift */; };
 		F32C10E4292E945E00300E67 /* UITabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10E3292E945E00300E67 /* UITabBarViewController.swift */; };
+		F32C10E6292E9CB900300E67 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10E5292E9CB900300E67 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F32C10DD292D613900300E67 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		F32C10DF292D618600300E67 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F32C10E3292E945E00300E67 /* UITabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarViewController.swift; sourceTree = "<group>"; };
+		F32C10E5292E9CB900300E67 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				F32C10E3292E945E00300E67 /* UITabBarViewController.swift */,
 				F32C10DD292D613900300E67 /* FeedViewController.swift */,
 				F32C10DF292D618600300E67 /* ProfileViewController.swift */,
+				F32C10E5292E9CB900300E67 /* PostViewController.swift */,
 				F32C10D2292D521400300E67 /* Assets.xcassets */,
 				F32C10D4292D521400300E67 /* LaunchScreen.storyboard */,
 				F32C10D7292D521400300E67 /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F32C10E6292E9CB900300E67 /* PostViewController.swift in Sources */,
 				F32C10CA292D521100300E67 /* AppDelegate.swift in Sources */,
 				F32C10E4292E945E00300E67 /* UITabBarViewController.swift in Sources */,
 				F32C10E0292D618600300E67 /* ProfileViewController.swift in Sources */,

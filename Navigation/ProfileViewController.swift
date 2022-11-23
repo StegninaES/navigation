@@ -13,6 +13,10 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Заголовок2"
         self.view.backgroundColor = UIColor.blue
+        self.navigationItem.title = "ProfiledVC"
+        let tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+       
+        self.tabBarItem = tabBarItem
     }
     
 
