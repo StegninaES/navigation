@@ -9,11 +9,14 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+    var post: Post?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Заголовок"
         self.view.backgroundColor = UIColor.green
         self.navigationItem.title = "FeedVC"
+        
         let tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
         
         self.tabBarItem = tabBarItem
@@ -25,12 +28,12 @@ class FeedViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonAction), for: .allTouchEvents)
 
         self.view.addSubview(button)
-        
+        post = Post(title: "Post1")
     }
 
     @objc func buttonAction(sender: UIButton!) {
         let postViewController: PostViewController = PostViewController()
-        
+        postViewController.post = post
         guard navigationController?.topViewController == self else { return }
         
         navigationController?.pushViewController(postViewController, animated: true)
