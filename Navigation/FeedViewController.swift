@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
         self.view.backgroundColor = UIColor.green
         self.navigationItem.title = "FeedVC"
         
-        let tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        let tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
         
         self.tabBarItem = tabBarItem
         
