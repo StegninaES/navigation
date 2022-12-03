@@ -10,15 +10,73 @@ import SwiftUI
 
 class ProfileHeaderView: UIView {
     
-    var userName = UILabel()
-    var status = UILabel()
-    var message = UITextField()
-    var button = UIButton()
-    var avatar = UIImageView(frame: CGRect(x: 180, y:200 , width: 120, height: 30))
-    let scale: CGFloat
+    private var userName: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Hipster Cat"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
+    private var status: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Waiting for something..."
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular, width: .standard)
+        label.textColor = .gray
+        return label
+    }()
+    
+    private var message: UITextField = {
+        var text = UITextField()
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.font = UIFont.systemFont(ofSize: 14, weight: .regular, width: .standard)
+        text.textColor = .gray
+        text.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        text.backgroundColor = .white
+        text.layer.borderWidth = 1
+        text.layer.borderColor = UIColor(.black).cgColor
+        text.layer.cornerRadius = 12
+        text.font = UIFont.systemFont(ofSize: 15, weight: .regular, width: .standard)
+        return text
+    }()
+    
+    private lazy var button: UIButton = {
+        var btn = UIButton()
+        btn.setTitle("Show status", for: .normal)
+        btn.backgroundColor = .blue
+        btn.setTitleColor(.white, for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        btn.layer.cornerRadius = 4.0
+        btn.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        btn.layer.shadowRadius = 4.0
+        btn.layer.shadowColor = UIColor(.black).cgColor
+        btn.layer.shadowOpacity = 0.7
+        return btn
+    }()
+    
+    private var avatar: UIImageView = {
+        var imageView = UIImageView()
+        var image = UIImage(named: "Image 1")
+        let imageSize = CGSize(width: 100, height: 100)
+        let imageWithBorder = UIGraphicsImageRenderer(size: imageSize).image { context in
+            let imageFrame = CGRect(
+                origin: .zero,
+                size: imageSize
+            )
+            let circle = UIBezierPath(ovalIn: imageFrame)
+            circle.addClip()
+            image?.draw(in: imageFrame)
+            circle.lineWidth = 3
+            UIColor.white.setStroke()
+            circle.stroke()
+        }
+        imageView.image = imageWithBorder
+        return imageView
+    }()
     
     override init(frame: CGRect) {
-        scale = UIScreen.main.scale/1.5
         super.init(frame: frame)
         addSubview(userName)
         addSubview(status)
@@ -32,54 +90,32 @@ class ProfileHeaderView: UIView {
         setupImage()
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func setupUsername() {
-        userName.translatesAutoresizingMaskIntoConstraints = false
-        userName.text = "Hipster Cat"
-        userName.font = UIFont.boldSystemFont(ofSize: 18)
-        userName.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        userName.topAnchor.constraint(equalTo: topAnchor, constant: 27*scale + 100).isActive = true
+        userName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        userName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27).isActive = true
     }
     
     private func setupStatus(){
-        status.translatesAutoresizingMaskIntoConstraints = false
-        status.text = "Waiting for something..."
-        status.font = UIFont.systemFont(ofSize: 14, weight: .regular, width: .standard)
-        status.textColor = .gray
-        status.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -49).isActive = true
-        status.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        status.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -74).isActive = true
+//        status.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        status.leadingAnchor.constraint(equalTo: userName.leadingAnchor).isActive = true
     }
     
     private func setupMessage() {
-        message.translatesAutoresizingMaskIntoConstraints = false
-        message.font = UIFont.systemFont(ofSize: 14, weight: .regular, width: .standard)
-        message.textColor = .gray
-        message.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        message.backgroundColor = .white
-        message.layer.borderWidth = 1
-        message.layer.borderColor = UIColor(.black).cgColor
-        message.layer.cornerRadius = 12
-        message.font = UIFont.systemFont(ofSize: 15, weight: .regular, width: .standard)
-        message.widthAnchor.constraint(equalTo: userName.widthAnchor, constant: 1).isActive = true
-        message.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 3).isActive = true
-        message.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        message.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 8).isActive = true
+        message.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2).isActive = true
+        message.leadingAnchor.constraint(equalTo: userName.leadingAnchor).isActive = true
     }
     
     private func setupButton() {
-        button.setTitle("Show status", for: .normal)
-        button.backgroundColor = .blue
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16*scale).isActive = true
-        button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16*scale).isActive = true
-        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16*scale).isActive = true
-        button.layer.cornerRadius = 4.0
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 32).isActive = true
+        button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         createShadow()
     }
     
@@ -89,32 +125,12 @@ class ProfileHeaderView: UIView {
     }
     
     func createShadow() {
-        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.layer.shadowRadius = 4.0
-        button.layer.shadowColor = UIColor(.black).cgColor
-        button.layer.shadowOpacity = 0.7
+        
     }
     
     private func setupImage() {
         avatar.translatesAutoresizingMaskIntoConstraints = false
-        avatar.topAnchor.constraint(equalTo: topAnchor, constant: 16*scale + 100).isActive = true
-        avatar.leftAnchor.constraint(equalTo: leftAnchor, constant: 16*scale).isActive = true
-      
-        var image = UIImage(named: "Image 1")
-        let imageSize = CGSize(width: 80, height: 80)
-        let imageWithBorder = UIGraphicsImageRenderer(size: imageSize).image { context in
-            let imageFrame = CGRect(
-                origin: .zero,
-                size: imageSize
-            )
-            let circle = UIBezierPath(ovalIn: imageFrame)
-            circle.addClip()
-            image?.draw(in: imageFrame)
-            circle.lineWidth = 3*scale
-            UIColor.white.setStroke()
-            circle.stroke()
-        }
-        
-        avatar.image = imageWithBorder        
+        avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        avatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
     }
 }

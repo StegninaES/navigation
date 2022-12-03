@@ -23,10 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //nav
         let feedNavController = UINavigationController(rootViewController: feedVC)
 
-        let profileNavController = UINavigationController(rootViewController: profileVC)
+//        let profileNavController = UINavigationController(rootViewController: profileVC)
         
         let tabBarVC = UITabBarViewController()
-        tabBarVC.setViewControllers([feedNavController, profileNavController], animated: true)
+        tabBarVC.setViewControllers([feedNavController, profileVC], animated: true)
         
         window.rootViewController = tabBarVC
         self.window = window

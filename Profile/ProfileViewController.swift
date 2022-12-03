@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UINavigationController {
     
     var profileHeaderView: ProfileHeaderView = ProfileHeaderView(frame: .zero)
     
@@ -24,7 +24,12 @@ class ProfileViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        profileHeaderView.frame = self.view.frame
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        let navBarHeight: CGFloat = navigationBar.bounds.height
+        profileHeaderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: navBarHeight).isActive = true
+        profileHeaderView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        profileHeaderView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        profileHeaderView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 
