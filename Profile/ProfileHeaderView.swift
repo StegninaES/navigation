@@ -9,7 +9,13 @@ import SwiftUI
 
 
 class ProfileHeaderView: UIView {
-    
+    private var newButton: UIButton = {
+        var newBtn = UIButton()
+        newBtn.translatesAutoresizingMaskIntoConstraints = false
+        newBtn.setTitle("новая кнопка", for: .normal)
+        newBtn.backgroundColor = .systemPink
+        return newBtn
+    }()
     private var userName: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -83,11 +89,13 @@ class ProfileHeaderView: UIView {
         addSubview(message)
         addSubview(button)
         addSubview(avatar)
+        addSubview(newButton)
         setupUsername()
         setupStatus()
         setupMessage()
         setupButton()
         setupImage()
+        setupNewBtn()
     }
     
     required init?(coder: NSCoder) {
@@ -116,7 +124,7 @@ class ProfileHeaderView: UIView {
         button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 32).isActive = true
         button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        createShadow()
+     
     }
     
     @objc func buttonAction(sender:UIButton){
@@ -124,8 +132,10 @@ class ProfileHeaderView: UIView {
         status.text = message.text ?? "Waiting for something..."
     }
     
-    func createShadow() {
-        
+    func setupNewBtn() {
+        newButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        newButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        newButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func setupImage() {
