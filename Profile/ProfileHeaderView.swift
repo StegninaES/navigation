@@ -13,7 +13,7 @@ class ProfileHeaderView: UIView {
         var newBtn = UIButton()
         newBtn.translatesAutoresizingMaskIntoConstraints = false
         newBtn.setTitle("новая кнопка", for: .normal)
-        newBtn.backgroundColor = .systemPink
+        newBtn.backgroundColor = .cyan
         return newBtn
     }()
     private var userName: UILabel = {
