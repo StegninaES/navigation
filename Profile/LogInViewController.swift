@@ -18,7 +18,6 @@ class LogInViewController: UIViewController {
     
     var scrollView: UIScrollView = {
         var scroll = UIScrollView(frame: .zero)
-        scroll.backgroundColor = .darkGray
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 3000)
         return scroll
@@ -26,29 +25,34 @@ class LogInViewController: UIViewController {
     
     private var login: UITextField = {
         var textField = UITextField()
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
         let myColor : UIColor = .lightGray
         textField.layer.borderColor = myColor.cgColor
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.clipsToBounds = true
         textField.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        textField.layer.backgroundColor = UIColor.systemGray.cgColor
-        textField.tintColor = UIColor.red
+        textField.layer.backgroundColor = UIColor.systemGray6.cgColor
+        textField.tintColor = UIColor(named: "MyCS")
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         textField.autocapitalizationType = .none
         return textField
     }()
     
+    
     private var password: UITextField = {
         var textField = UITextField()
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
         let myColor : UIColor = .lightGray
         textField.layer.borderColor = myColor.cgColor
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.clipsToBounds = true
         textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        textField.layer.backgroundColor = UIColor.systemGray.cgColor
+        textField.layer.backgroundColor = UIColor.systemGray6.cgColor
         textField.tintColor = UIColor.red
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -105,6 +109,7 @@ class LogInViewController: UIViewController {
         self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ks.height
                                                     - self.view.safeAreaInsets.bottom + 20 , right: 0)
     }
+    
     @objc func keyboardWillHide(_ notification: NSNotification){
         self.scrollView.contentInset = .zero
     }
@@ -164,6 +169,8 @@ class LogInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        self.tabBarItem = tabBarItem
         view.addSubview(scrollView)
         view.backgroundColor = .white
         
