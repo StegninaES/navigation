@@ -19,14 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let feedVC = FeedViewController()
-        let profileVC = ProfileViewController()
+
+        let loginVC =  LogInViewController()
         //nav
         let feedNavController = UINavigationController(rootViewController: feedVC)
 
-//        let profileNavController = UINavigationController(rootViewController: profileVC)
+        let loginNavController = UINavigationController(rootViewController: loginVC)
+        loginNavController.navigationBar.isHidden = true
         
         let tabBarVC = UITabBarViewController()
-        tabBarVC.setViewControllers([feedNavController, profileVC], animated: true)
+        tabBarVC.setViewControllers([feedNavController, loginNavController], animated: true)
         
         window.rootViewController = tabBarVC
         self.window = window
