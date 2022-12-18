@@ -28,13 +28,11 @@ class PostTableViewCell: UITableViewCell {
         title.textColor = .black
         title.font = UIFont.systemFont(ofSize: 20, weight: .bold, width: .standard)
         title.numberOfLines = 2
-      
         return title
     }()
     
     private var image: UIImageView = {
-        var imageSize = UIScreen.main.bounds.width
-        var image = UIImageView(frame: CGRect(x: 0, y: 105, width: imageSize, height: imageSize))
+        var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
@@ -73,12 +71,12 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         contentView.addSubview(title)
         contentView.addSubview(image)
         contentView.addSubview(content)
         contentView.addSubview(likes)
         contentView.addSubview(views)
+        createConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -87,17 +85,13 @@ class PostTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        title.translatesAutoresizingMaskIntoConstraints = false
-        image.translatesAutoresizingMaskIntoConstraints = false
-        likes.translatesAutoresizingMaskIntoConstraints = false
-        views.translatesAutoresizingMaskIntoConstraints = false
-        content.translatesAutoresizingMaskIntoConstraints = false
-        
+        createConstraints()
+    }
+    
+    private func createConstraints() {
         NSLayoutConstraint.activate([
             
             title.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            title.heightAnchor.constraint(equalToConstant: 100),
             title.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             title.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
@@ -105,21 +99,19 @@ class PostTableViewCell: UITableViewCell {
             image.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             image.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
-            likes.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
-            likes.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
-            likes.heightAnchor.constraint(equalToConstant: 50),
-            likes.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            
-            views.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
-            views.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
-            views.heightAnchor.constraint(equalToConstant: 50),
-            views.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            
             content.topAnchor.constraint(equalTo: image.safeAreaLayoutGuide.bottomAnchor),
             content.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             content.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            content.bottomAnchor.constraint(equalTo: likes.safeAreaLayoutGuide.topAnchor)
+            
+            likes.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor),
+            likes.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
+            likes.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            views.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor),
+            views.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
+            views.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
+            contentView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
         ])
-        
     }
 }
