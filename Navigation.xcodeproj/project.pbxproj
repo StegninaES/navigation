@@ -19,6 +19,8 @@
 		F32C10F329361A6800300E67 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10F229361A6800300E67 /* ProfileHeaderView.swift */; };
 		F32C10F529361BFA00300E67 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C10F429361BFA00300E67 /* ProfileViewController.swift */; };
 		F39A1D94293FB1B6006BC977 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A1D93293FB1B6006BC977 /* LogInViewController.swift */; };
+		F39A1D962947A134006BC977 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39A1D952947A134006BC977 /* PostTableViewCell.swift */; };
+		F3CCFFB0294B9CC600915561 /* PostBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CCFFAF294B9CC600915561 /* PostBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		F32C10F229361A6800300E67 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		F32C10F429361BFA00300E67 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F39A1D93293FB1B6006BC977 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		F39A1D952947A134006BC977 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		F3CCFFAF294B9CC600915561 /* PostBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				F32C10F229361A6800300E67 /* ProfileHeaderView.swift */,
 				F32C10F429361BFA00300E67 /* ProfileViewController.swift */,
 				F39A1D93293FB1B6006BC977 /* LogInViewController.swift */,
+				F39A1D952947A134006BC977 /* PostTableViewCell.swift */,
+				F3CCFFAF294B9CC600915561 /* PostBuilder.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -163,6 +169,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F39A1D962947A134006BC977 /* PostTableViewCell.swift in Sources */,
+				F3CCFFB0294B9CC600915561 /* PostBuilder.swift in Sources */,
 				F32C10E6292E9CB900300E67 /* PostViewController.swift in Sources */,
 				F32C10CA292D521100300E67 /* AppDelegate.swift in Sources */,
 				F32C10F529361BFA00300E67 /* ProfileViewController.swift in Sources */,

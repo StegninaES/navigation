@@ -136,7 +136,7 @@ class LogInViewController: UIViewController {
     
     private func setupLogin() {
         login.translatesAutoresizingMaskIntoConstraints = false
-        login.topAnchor.constraint(equalTo: logo.topAnchor, constant: 120).isActive = true
+        login.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 120).isActive = true
         login.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         login.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         login.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true

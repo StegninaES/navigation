@@ -78,6 +78,7 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         addSubview(userName)
         addSubview(status)
         addSubview(message)
@@ -101,7 +102,6 @@ class ProfileHeaderView: UIView {
     
     private func setupStatus(){
         status.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -74).isActive = true
-//        status.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
         status.leadingAnchor.constraint(equalTo: userName.leadingAnchor).isActive = true
     }
     

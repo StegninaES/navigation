@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonAction), for: .allTouchEvents)
 
         self.view.addSubview(button)
-        post = Post(title: "Post1")
+//      post = Post(title: "Post1")
     }
 
     @objc func buttonAction(sender: UIButton!) {
