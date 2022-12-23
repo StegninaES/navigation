@@ -68,7 +68,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate  {
     
     @objc func handleTap(gestureRecognizer: UIGestureRecognizer) {
         let photosViewController: PhotosViewController = PhotosViewController()
-        photosViewController.photos = PhotosBuilder()
         guard navigationController?.topViewController == self else { return }
         
         navigationController?.pushViewController(photosViewController, animated: true)
