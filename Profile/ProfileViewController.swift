@@ -14,10 +14,15 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
     var myTabelView = UITableView()
     let profileHeaderView = ProfileHeaderView()
     let headerView = PhotosTableViewCell()
+    var avatar: UIImageView!
+    var bluredView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bluredView = UIView(frame: UIScreen.main.bounds)
         createTable()
         setupTable()
+        setupAvatar()
     }
     
     func createTable() {
@@ -36,6 +41,85 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         myTabelView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         myTabelView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         myTabelView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+    
+    private func setupAvatar () {
+        avatar = profileHeaderView.avatar
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleImageTap))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.numberOfTouchesRequired = 1
+        avatar.isUserInteractionEnabled = true
+        avatar.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc func handleImageTap(gestureRecognizer: UIGestureRecognizer) {
+        let scenes = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let window = scenes?.windows.last
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.frame = UIScreen.main.bounds
+        
+        bluredView.addSubview(visualEffectView)
+        bluredView.addSubview(self.avatar)
+
+        window!.addSubview(bluredView)
+        
+        let button = createClosseButton()
+        bluredView.addSubview(button)
+        
+        
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: bluredView.topAnchor, constant: 40),
+            button.trailingAnchor.constraint(equalTo: bluredView.trailingAnchor, constant: -20)
+        ])
+        
+        button.layer.opacity = 0
+        
+        bluredView.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.5, animations: { [self] in
+            avatar.isUserInteractionEnabled = false
+            
+            let scale = UIScreen.main.bounds.width / self.avatar.bounds.width
+            self.avatar.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+            self.avatar.center.x = bluredView.center.x
+            self.avatar.center.y = bluredView.bounds.midY
+            
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.layer.opacity = 1
+            })
+        })
+    }
+    
+    func createClosseButton() -> UIButton  {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.frame = CGRect(x: 20, y: 20, width: 36, height: 36)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("X", for: .normal)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = button.frame.size.height / 2.0
+        button.addTarget(self, action: #selector(clossButtonTap), for: .allTouchEvents)
+
+        return button
+    }
+    
+    @objc func clossButtonTap()  {
+        UIView.animate(withDuration: 0.5, animations: { [self] in
+            avatar.isUserInteractionEnabled = false
+            self.avatar.transform = CGAffineTransform.identity
+            
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, animations: { [self] in
+                profileHeaderView.addSubview(avatar)
+                profileHeaderView.setupConstraints()
+                bluredView.removeFromSuperview()
+            })
+        })
     }
 }
 

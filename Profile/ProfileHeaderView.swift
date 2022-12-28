@@ -58,9 +58,12 @@ class ProfileHeaderView: UIView {
         return btn
     }()
     
-    private var avatar: UIImageView = {
+   public lazy var avatar: UIImageView = {
         var imageView = UIImageView()
         var image = UIImage(named: "Image 1")
+        
+        
+        
         let imageSize = CGSize(width: 100, height: 100)
         let imageWithBorder = UIGraphicsImageRenderer(size: imageSize).image { context in
             let imageFrame = CGRect(
@@ -118,7 +121,6 @@ class ProfileHeaderView: UIView {
         button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 32).isActive = true
         button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-        createShadow()
     }
     
     @objc func buttonAction(sender:UIButton){
@@ -126,13 +128,19 @@ class ProfileHeaderView: UIView {
         status.text = message.text ?? "Waiting for something..."
     }
     
-    func createShadow() {
-        
+    public func setupConstraints() {
+        setupUsername()
+        setupStatus()
+        setupMessage()
+        setupButton()
+        setupImage()
     }
     
-    private func setupImage() {
+   public func setupImage() {
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         avatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
     }
+    
+   
 }
