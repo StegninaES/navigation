@@ -64,8 +64,8 @@ class PostTableViewCell: UITableViewCell {
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = UIFont.systemFont(ofSize: 16, weight: .regular, width: .standard)
         views.textColor = .black
-    
         views.textAlignment = .right
+        
         return views
     }()
     
@@ -91,27 +91,27 @@ class PostTableViewCell: UITableViewCell {
     private func createConstraints() {
         NSLayoutConstraint.activate([
             
-            title.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            title.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 18),
             title.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             title.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            image.topAnchor.constraint(equalTo: title.safeAreaLayoutGuide.bottomAnchor),
+            image.topAnchor.constraint(equalTo: title.safeAreaLayoutGuide.bottomAnchor, constant: 18),
             image.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             image.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
-            content.topAnchor.constraint(equalTo: image.safeAreaLayoutGuide.bottomAnchor),
+            content.topAnchor.constraint(equalTo: image.safeAreaLayoutGuide.bottomAnchor, constant: 18),
             content.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             content.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            likes.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor),
+            likes.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor, constant: 18),
             likes.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
             likes.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
-            views.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor),
+            views.topAnchor.constraint(equalTo: content.safeAreaLayoutGuide.bottomAnchor, constant: 18),
             views.widthAnchor.constraint(equalToConstant: contentView.bounds.width / 2 - 16),
             views.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            contentView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
+            contentView.bottomAnchor.constraint(equalTo: views.bottomAnchor,constant: 18)
         ])
     }
 }

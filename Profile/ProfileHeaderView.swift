@@ -10,6 +10,8 @@ import SwiftUI
 
 class ProfileHeaderView: UIView {
     
+    static let identifier = "ProfileHeaderView"
+    
     private var userName: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
