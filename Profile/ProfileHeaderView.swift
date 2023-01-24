@@ -124,8 +124,9 @@ class ProfileHeaderView: UIView {
     }
     
     @objc func buttonAction(sender:UIButton){
-        print(message.text ?? "нет сообщений")
-        status.text = message.text ?? "Waiting for something..."
+        if message.text?.count != 0 {
+            status.text = message.text!
+        }
     }
     
     public func setupConstraints() {
