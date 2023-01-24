@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate {
     
     var stackView: UIStackView = {
         var stack = UIStackView(frame: .zero)
@@ -23,7 +23,7 @@ class LogInViewController: UIViewController {
         return scroll
     }()
     
-    private var login: UITextField = {
+    private lazy var login: UITextField = {
         var textField = UITextField()
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -42,7 +42,7 @@ class LogInViewController: UIViewController {
     }()
     
     
-    private var password: UITextField = {
+    private lazy var password: UITextField = {
         var textField = UITextField()
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -59,6 +59,17 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         return textField
+    }()
+    
+    private var alert: UILabel = {
+        var alert = UILabel()
+        alert.isHidden = true
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        alert.font = UIFont.systemFont(ofSize: 12, weight: .regular, width: .standard)
+        alert.textColor = .red
+        alert.text = "пароль должен содержать более 3 символов"
+    
+        return alert
     }()
     
     private var logo: UIImageView = {
@@ -94,6 +105,30 @@ class LogInViewController: UIViewController {
         btn.layer.masksToBounds = true
         return btn
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
+        self.tabBarItem = tabBarItem
+        view.addSubview(scrollView)
+        view.backgroundColor = .white
+        
+        stackView.addSubview(logo)
+        stackView.addSubview(login)
+        stackView.addSubview(password)
+        stackView.addSubview(button)
+        stackView.addSubview(alert)
+        scrollView.addSubview(stackView)
+        
+        setupStackView()
+        setupScrollView()
+        setupLogo()
+        setupLogin()
+        setupPassword()
+        setupButton()
+        setupAlert()
+        subscribeKeyboardEvents()
+    }
     
     func subscribeKeyboardEvents (){
         NotificationCenter.default.addObserver(self, selector: #selector (keyboardWillShow), name:
@@ -153,6 +188,12 @@ class LogInViewController: UIViewController {
         
     }
     
+    private func setupAlert() {
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        alert.topAnchor.constraint(equalTo: password.bottomAnchor).isActive = true
+        alert.leadingAnchor.constraint(equalTo: password.leadingAnchor).isActive = true
+    }
+    
     private func setupButton() {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.topAnchor.constraint(equalTo: password.bottomAnchor, constant: 16).isActive = true
@@ -161,32 +202,47 @@ class LogInViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    @objc func buttonAction(sender: UIButton){
+    @objc func buttonAction(sender: UIButton) {
+        checkLoginAndPassword()
+        
         let profileViewController = ProfileViewController()
         guard navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(profileViewController, animated: true)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-        self.tabBarItem = tabBarItem
-        view.addSubview(scrollView)
-        view.backgroundColor = .white
+    
+    private func checkLoginAndPassword() {
+        if login.text?.count == 0 {
+            login.backgroundColor = .red
+            return
+        } else {
+            login.layer.backgroundColor = UIColor.systemGray6.cgColor
+        }
         
-        stackView.addSubview(logo)
-        stackView.addSubview(login)
-        stackView.addSubview(password)
-        stackView.addSubview(button)
-        scrollView.addSubview(stackView)
+        if password.text?.count == 0 {
+            password.backgroundColor = .red
+            return
+        } else if password.text!.count < 4 {
+            alert.isHidden = false
+            return
+        } else {
+            password.layer.backgroundColor = UIColor.systemGray6.cgColor
+        }
         
-        setupStackView()
-        setupScrollView()
-        setupLogo()
-        setupLogin()
-        setupPassword()
-        setupButton()
-        subscribeKeyboardEvents()
+        if login.text != "Вася2012" {
+            showAlert()
+        }
+    
+        if password.text != "ВАня1234"{
+            showAlert()
+        }
+    }
+    
+    private func showAlert() {
+        let alertMessage = UIAlertController(title: "Ошибка",
+               message: "Неверный логин или пароль",
+               preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertMessage, animated: true)
     }
 
 }

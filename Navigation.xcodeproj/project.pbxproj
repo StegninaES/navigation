@@ -102,11 +102,11 @@
 			children = (
 				F32C10F229361A6800300E67 /* ProfileHeaderView.swift */,
 				F32C10F429361BFA00300E67 /* ProfileViewController.swift */,
-				F39A1D93293FB1B6006BC977 /* LogInViewController.swift */,
 				F39A1D952947A134006BC977 /* PostTableViewCell.swift */,
 				F3CCFFAF294B9CC600915561 /* PostBuilder.swift */,
 				F35CC2942950E54E00D0CCC6 /* PhotosTableViewCell.swift */,
 				F35CC2982950F50A00D0CCC6 /* PhotosCollectionView.swift */,
+				F39A1D93293FB1B6006BC977 /* LogInViewController.swift */,
 				F35CC29A2953714000D0CCC6 /* PhotosBuilder.swift */,
 				F35CC29C295456C100D0CCC6 /* PhotosViewController.swift */,
 				F35CC29E2954701500D0CCC6 /* PhotosCollectionViewCell.swift */,
