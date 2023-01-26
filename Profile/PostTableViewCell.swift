@@ -50,12 +50,14 @@ class PostTableViewCell: UITableViewCell {
         return content
     }()
     
-    private var likes: UILabel = {
+    private lazy var likes: UILabel = {
         var likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = UIFont.systemFont(ofSize: 16, weight: .regular, width: .standard)
         likes.textColor = .black
-    
+        let tap = UITapGestureRecognizer(target: self, action: #selector(increaseLikes))
+        likes.addGestureRecognizer(tap)
+        likes.isUserInteractionEnabled = true
         return likes
     }()
     
@@ -86,6 +88,10 @@ class PostTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         createConstraints()
+    }
+    
+    @objc private func increaseLikes() {
+        post!.likes += 1
     }
     
     private func createConstraints() {
