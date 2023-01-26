@@ -228,11 +228,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             password.layer.backgroundColor = UIColor.systemGray6.cgColor
         }
         
-        if login.text != "Вася2012" {
+        if login.text != "Login" {
             showAlert()
         }
     
-        if password.text != "ВАня1234"{
+        if password.text != "1234"{
             showAlert()
         }
     }

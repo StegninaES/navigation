@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    let posts: [Post] = PostBuilder.createPosts()
+    var posts: [Post] = PostBuilder.createPosts()
     let photos: [UIImage] = PhotosBuilder.createPhotos()
     var myTabelView = UITableView()
     let profileHeaderView = ProfileHeaderView()
@@ -167,7 +167,29 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier) as! PostTableViewCell
         cell.post = posts[indexPath.row]
+        cell.myVC = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { return true }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        myTabelView.setEditing(editing, animated: animated)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            print("delete")
+            myTabelView.beginUpdates()
+            posts.remove(at: indexPath.row)
+            myTabelView.deleteRows(at: [indexPath], with: .automatic)
+            myTabelView.endUpdates()
+        }
     }
 }
 

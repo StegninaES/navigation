@@ -10,6 +10,7 @@ import UIKit
 class PostTableViewCell: UITableViewCell {
     
     static let identifier = "PostTableViewCell"
+    var myVC: UIViewController = UIViewController()
     
     var post: Post? {
         didSet {
@@ -31,11 +32,14 @@ class PostTableViewCell: UITableViewCell {
         return title
     }()
     
-    private var image: UIImageView = {
+    private lazy var image: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showDetails))
+        image.addGestureRecognizer(tap)
+        image.isUserInteractionEnabled = true
         
         return image
     }()
@@ -50,12 +54,14 @@ class PostTableViewCell: UITableViewCell {
         return content
     }()
     
-    private var likes: UILabel = {
+    private lazy var likes: UILabel = {
         var likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = UIFont.systemFont(ofSize: 16, weight: .regular, width: .standard)
         likes.textColor = .black
-    
+        let tap = UITapGestureRecognizer(target: self, action: #selector(increaseLikes))
+        likes.addGestureRecognizer(tap)
+        likes.isUserInteractionEnabled = true
         return likes
     }()
     
@@ -86,6 +92,18 @@ class PostTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         createConstraints()
+    }
+    
+    @objc private func increaseLikes() {
+        post!.likes += 1
+    }
+    
+    @objc private func showDetails() {
+        post!.views += 1
+        let detailsPostViewController = DetailsPostViewController()
+        detailsPostViewController.title = post?.title
+        detailsPostViewController.details.text = post?.description
+        myVC.navigationController?.pushViewController(detailsPostViewController, animated: true)
     }
     
     private func createConstraints() {
