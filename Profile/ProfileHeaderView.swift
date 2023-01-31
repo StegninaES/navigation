@@ -34,7 +34,6 @@ class ProfileHeaderView: UIView {
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = UIFont.systemFont(ofSize: 14, weight: .regular, width: .standard)
         text.textColor = .gray
-        text.heightAnchor.constraint(equalToConstant: 40).isActive = true
         text.backgroundColor = .white
         text.layer.borderWidth = 1
         text.layer.borderColor = UIColor(.black).cgColor
@@ -60,10 +59,8 @@ class ProfileHeaderView: UIView {
     
    public lazy var avatar: UIImageView = {
         var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         var image = UIImage(named: "Image 1")
-        
-        
-        
         let imageSize = CGSize(width: 100, height: 100)
         let imageWithBorder = UIGraphicsImageRenderer(size: imageSize).image { context in
             let imageFrame = CGRect(
@@ -89,38 +86,11 @@ class ProfileHeaderView: UIView {
         addSubview(message)
         addSubview(button)
         addSubview(avatar)
-        setupUsername()
-        setupStatus()
-        setupMessage()
-        setupButton()
-        setupImage()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupUsername() {
-        userName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        userName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27).isActive = true
-    }
-    
-    private func setupStatus(){
-        status.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -74).isActive = true
-        status.leadingAnchor.constraint(equalTo: userName.leadingAnchor).isActive = true
-    }
-    
-    private func setupMessage() {
-        message.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 8).isActive = true
-        message.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2).isActive = true
-        message.leadingAnchor.constraint(equalTo: userName.leadingAnchor).isActive = true
-    }
-    
-    private func setupButton() {
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 32).isActive = true
-        button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
     }
     
     @objc func buttonAction(sender:UIButton){
@@ -130,18 +100,26 @@ class ProfileHeaderView: UIView {
     }
     
     public func setupConstraints() {
-        setupUsername()
-        setupStatus()
-        setupMessage()
-        setupButton()
-        setupImage()
+        NSLayoutConstraint.activate([
+            userName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            userName.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            
+            status.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -74),
+            status.leadingAnchor.constraint(equalTo: userName.leadingAnchor),
+            
+            message.topAnchor.constraint(equalTo: status.bottomAnchor, constant: 8),
+            message.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2),
+            message.leadingAnchor.constraint(equalTo: userName.leadingAnchor),
+            
+            button.heightAnchor.constraint(equalToConstant: 50),
+            button.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 32),
+            button.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            button.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            
+            avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            
+            message.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
-    
-   public func setupImage() {
-        avatar.translatesAutoresizingMaskIntoConstraints = false
-        avatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
-        avatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
-    }
-    
-   
 }

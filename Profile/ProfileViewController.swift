@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         bluredView = UIView(frame: UIScreen.main.bounds)
         createTable()
         setupTable()
@@ -29,14 +30,13 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         myTabelView = UITableView(frame: view.bounds, style: .plain)
         myTabelView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         myTabelView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
-        self.myTabelView.delegate = self
-        self.myTabelView.dataSource = self
+        myTabelView.delegate = self
+        myTabelView.dataSource = self
         view.addSubview(myTabelView)
         myTabelView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupTable() {
-        myTabelView.translatesAutoresizingMaskIntoConstraints = false
         myTabelView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
         myTabelView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         myTabelView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -60,13 +60,12 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         visualEffectView.frame = UIScreen.main.bounds
         
         bluredView.addSubview(visualEffectView)
-        bluredView.addSubview(self.avatar)
+        bluredView.addSubview(avatar)
 
         window!.addSubview(bluredView)
         
         let button = createClosseButton()
         bluredView.addSubview(button)
-        
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: bluredView.topAnchor, constant: 40),
@@ -80,12 +79,12 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: 0.5, animations: { [self] in
             avatar.isUserInteractionEnabled = false
             
-            let scale = UIScreen.main.bounds.width / self.avatar.bounds.width
-            self.avatar.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-            self.avatar.center.x = bluredView.center.x
-            self.avatar.center.y = bluredView.bounds.midY
+            let scale = UIScreen.main.bounds.width / avatar.bounds.width
+            avatar.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+            avatar.center.x = bluredView.center.x
+            avatar.center.y = bluredView.bounds.midY
             
-            self.view.layoutIfNeeded()
+            view.layoutIfNeeded()
         }, completion: { _ in
             UIView.animate(withDuration: 0.3, animations: {
                 button.layer.opacity = 1
@@ -97,22 +96,22 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.frame = CGRect(x: 20, y: 20, width: 36, height: 36)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.setTitle("X", for: .normal)
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = button.frame.size.height / 2.0
-        button.addTarget(self, action: #selector(clossButtonTap), for: .allTouchEvents)
+        button.addTarget(self, action: #selector(closeButtonTap), for: .allTouchEvents)
 
         return button
     }
     
-    @objc func clossButtonTap()  {
+    @objc func closeButtonTap()  {
         UIView.animate(withDuration: 0.5, animations: { [self] in
-            avatar.isUserInteractionEnabled = false
-            self.avatar.transform = CGAffineTransform.identity
+            avatar.isUserInteractionEnabled = true
+            avatar.transform = CGAffineTransform.identity
             
-            self.view.layoutIfNeeded()
+            view.layoutIfNeeded()
         }, completion: { _ in
             UIView.animate(withDuration: 0.3, animations: { [self] in
                 profileHeaderView.addSubview(avatar)
@@ -127,7 +126,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 220
+            return 180
         }
         return 160
     }

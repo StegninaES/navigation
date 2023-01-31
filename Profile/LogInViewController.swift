@@ -13,6 +13,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     var stackView: UIStackView = {
         var stack = UIStackView(frame: .zero)
         stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
@@ -25,6 +26,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var login: UITextField = {
         var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Username"
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -45,6 +47,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var password: UITextField = {
         var textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Password"
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -76,6 +79,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private var logo: UIImageView = {
         var logoView = UIImageView()
+        logoView.translatesAutoresizingMaskIntoConstraints = false
         var logo = UIImage(named: "logo 1")
         let logoSize = CGSize(width: 100, height: 100)
         let logoWithBorder = UIGraphicsImageRenderer(size: logoSize).image { context in
@@ -92,6 +96,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var button: UIButton = {
         var btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Log In", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         let image = UIImage(named: "blue_pixel.png")
@@ -122,13 +127,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         stackView.addSubview(alert)
         scrollView.addSubview(stackView)
         
-        setupStackView()
-        setupScrollView()
-        setupLogo()
-        setupLogin()
-        setupPassword()
-        setupButton()
-        setupAlert()
+        setupConstraints()
         subscribeKeyboardEvents()
     }
     
@@ -150,58 +149,40 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc func keyboardWillHide(_ notification: NSNotification){
         self.scrollView.contentInset = .zero
     }
-    
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.heightAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.heightAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.widthAnchor).isActive = true
-    }
-    
-    private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        scrollView.centerXAnchor.constraint (equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        scrollView.centerYAnchor.constraint (equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-    }
-    
-    private func setupLogo() {
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logo.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor, constant: 120).isActive = true
-        logo.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-    }
-    
-    private func setupLogin() {
-        login.translatesAutoresizingMaskIntoConstraints = false
-        login.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 120).isActive = true
-        login.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        login.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        login.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        login.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
-    
-    private func setupPassword() {
-        password.translatesAutoresizingMaskIntoConstraints = false
-        password.topAnchor.constraint(equalTo: login.bottomAnchor).isActive = true
-        password.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        password.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        password.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        password.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-    }
-    
-    private func setupAlert() {
-        alert.translatesAutoresizingMaskIntoConstraints = false
-        alert.topAnchor.constraint(equalTo: password.bottomAnchor).isActive = true
-        alert.leadingAnchor.constraint(equalTo: password.leadingAnchor).isActive = true
-    }
-    
-    private func setupButton() {
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.topAnchor.constraint(equalTo: password.bottomAnchor, constant: 16).isActive = true
-        button.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        button.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            stackView.heightAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.heightAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.widthAnchor),
+            
+            scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+            scrollView.centerXAnchor.constraint (equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            scrollView.centerYAnchor.constraint (equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            
+            logo.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor, constant: 120),
+            logo.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor),
+            
+            login.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 120),
+            login.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor),
+            login.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            login.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            login.heightAnchor.constraint(equalToConstant: 50),
+            
+            password.topAnchor.constraint(equalTo: login.bottomAnchor),
+            password.centerXAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.centerXAnchor),
+            password.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            password.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            password.heightAnchor.constraint(equalToConstant: 50),
+            
+            button.topAnchor.constraint(equalTo: password.bottomAnchor, constant: 16),
+            button.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            button.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            button.heightAnchor.constraint(equalToConstant: 50),
+            
+            alert.topAnchor.constraint(equalTo: password.bottomAnchor),
+            alert.leadingAnchor.constraint(equalTo: password.leadingAnchor)
+        ])
     }
     
     @objc func buttonAction(sender: UIButton) {
