@@ -205,38 +205,41 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func buttonAction(sender: UIButton) {
-        checkLoginAndPassword()
-        
-        let profileViewController = ProfileViewController()
-        guard navigationController?.topViewController == self else { return }
-        navigationController?.pushViewController(profileViewController, animated: true)
+        if loginAndPasswordIsCorrect() {
+            let profileViewController = ProfileViewController()
+            guard navigationController?.topViewController == self else { return }
+            navigationController?.pushViewController(profileViewController, animated: true)
+        }
     }
     
-    private func checkLoginAndPassword() {
+    private func loginAndPasswordIsCorrect() -> Bool {
         if login.text?.count == 0 {
             login.backgroundColor = .red
-            return
+            return false
         } else {
             login.layer.backgroundColor = UIColor.systemGray6.cgColor
         }
         
         if password.text?.count == 0 {
             password.backgroundColor = .red
-            return
+            return false
         } else if password.text!.count < 4 {
             alert.isHidden = false
-            return
+            return false
         } else {
             password.layer.backgroundColor = UIColor.systemGray6.cgColor
         }
         
         if login.text != "Login" {
             showAlert()
+            return false
         }
     
-        if password.text != "1234"{
+        if password.text != "1234" {
             showAlert()
+            return false
         }
+        return true
     }
     
     private func showAlert() {
