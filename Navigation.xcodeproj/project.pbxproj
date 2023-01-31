@@ -68,7 +68,6 @@
 		F32C10BD292D521100300E67 = {
 			isa = PBXGroup;
 			children = (
-				F32C10ED2936172B00300E67 /* Profile */,
 				F32C10C8292D521100300E67 /* Navigation */,
 				F32C10C7292D521100300E67 /* Products */,
 			);
@@ -85,6 +84,7 @@
 		F32C10C8292D521100300E67 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				F32C10ED2936172B00300E67 /* Profile */,
 				F32C10CB292D521100300E67 /* SceneDelegate.swift */,
 				F32C10C9292D521100300E67 /* AppDelegate.swift */,
 				F32C10E3292E945E00300E67 /* UITabBarViewController.swift */,
