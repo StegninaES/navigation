@@ -57,13 +57,12 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         visualEffectView.frame = UIScreen.main.bounds
         
         bluredView.addSubview(visualEffectView)
-        bluredView.addSubview(self.image)
+        bluredView.addSubview(image)
 
         window!.addSubview(bluredView)
         
         let button = createClosseButton()
         bluredView.addSubview(button)
-        
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: bluredView.topAnchor, constant: 40),
@@ -77,10 +76,10 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         UIView.animate(withDuration: 0.5, animations: { [self] in
             image.isUserInteractionEnabled = false
             
-            let scale = UIScreen.main.bounds.width / self.image.bounds.width
-            self.image.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-            self.image.center.x = bluredView.center.x
-            self.image.center.y = bluredView.bounds.midY
+            let scale = UIScreen.main.bounds.width / image.bounds.width
+            image.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+            image.center.x = bluredView.center.x
+            image.center.y = bluredView.bounds.midY
             
             layoutIfNeeded()
         }, completion: { _ in
@@ -107,7 +106,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     @objc func closeButtonTap()  {
         UIView.animate(withDuration: 0.5, animations: { [self] in
             image.isUserInteractionEnabled = true
-            self.image.transform = CGAffineTransform.identity
+            image.transform = CGAffineTransform.identity
             
             layoutIfNeeded()
         }, completion: { _ in

@@ -17,8 +17,7 @@ class PostViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         let rifhtBarButton = UIBarButtonItem(title: "Button", style: .done, target: self, action:#selector(goToInfo))
-        
-        // self.navigationController?.navigationItem.rightBarButtonItem = rifhtBarButton Почему так не работает??
+    
         navigationItem.rightBarButtonItem = rifhtBarButton
     }
     
