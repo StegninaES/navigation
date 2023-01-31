@@ -25,6 +25,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var login: UITextField = {
         var textField = UITextField()
+        textField.placeholder = "Username"
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         let myColor : UIColor = .lightGray
@@ -44,6 +45,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var password: UITextField = {
         var textField = UITextField()
+        textField.placeholder = "Password"
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         let myColor : UIColor = .lightGray
